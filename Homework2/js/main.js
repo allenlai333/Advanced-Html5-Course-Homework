@@ -1,13 +1,8 @@
 $(function() {
 
     $(".slideshow").slideShow({
-        imgPaths: ["./img/slide-1.jpg", "./img/slide-2.jpg", "./img/slide-3.jpg", "./img/slide-4.jpg"],
-        alt: "click",
-        width: 80, // 0 ~ 100 %
-        height: 465,
-        interval: 2000,
-        duration: 500,
-        easing: "easeInOutExpo"
+        imgPaths: ["./img/slide-1.jpg", "./img/slide-2.jpg", "./img/slide-3.jpg", "./img/slide-4.jpg"]
+        width: 80 // 0 ~ 100 %
     });
 });
 
@@ -15,7 +10,17 @@ $(function() {
 //使用json物件寫入
 (function($) {
     $.fn.slideShow = function(options) {
-        var imgCount = options.imgPaths.length;
+        var _settings = $.extend({
+            imgPaths:[],
+            alt: "click",
+            width: 100, // 0 ~ 100 %
+            height: 465,
+            interval: 2000,
+            duration: 500,
+            easing: "easeInOutExpo"
+        }, options);
+
+        var imgCount = _settings.imgPaths.length;
 
         return this.each(function() {
             var $this = $(this);
@@ -28,10 +33,10 @@ $(function() {
                 $indicator = $this.find(".slideshow-indicator"),
                 slideCount = $slides.length,
                 currentIndex = 0,
-                interval = options.interval, //自動切換的時間
+                interval = _settings.interval, //自動切換的時間
                 indicatorHTML = "", //indicator的小圓點HTML內容
-                duration = options.duration, //效果的時間
-                easing = options.easing, //jQuery animation的動畫函數
+                duration = _settings.duration, //效果的時間
+                easing = _settings.easing, //jQuery animation的動畫函數
                 timer;
 
             function init() {
@@ -50,7 +55,7 @@ $(function() {
                     class: "slideshow-indicator"
                 });
 
-                for (var i in options.imgPaths) {
+                for (var i in _settings.imgPaths) {
                     //建立圖片連結
                     var $a = $("<a>", {
                         href: "#",
@@ -60,13 +65,13 @@ $(function() {
 
                     //建立img元素
                     var $img = $("<img>", {
-                        src: options.imgPaths[i],
-                        alt: options.alt,
-                        width: options.width + "%",
-                        height: options.height,
+                        src: _settings.imgPaths[i],
+                        alt: _settings.alt,
+                        width: _settings.width + "%",
+                        height: _settings.height,
                     });
 
-                    var imgGap = (100 - parseInt(options.width)) / 2;
+                    var imgGap = (100 - parseInt(_settings.width)) / 2;
                     if (imgGap > 0) {
                         $img.css({
                             left: imgGap + "%"
