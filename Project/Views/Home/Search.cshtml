@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MobileWeb.Models.friends>
+<script src="~/Scripts/search.js"></script>
+@{
+    ViewBag.Title = "Search";
+    var savePath = ViewBag.SavePath as string;
+    var firstName = string.Empty;
+}
+@section header{
+    <a href="#" data-rel="back" data-icon="arrow-l" class="ui-btn-left">返回</a>
+}
+@if (Model != null)
+{
+    <ul id="friendsListView" data-role="listview" data-split-icon="search" data-inset="true" data-filter="true" data-divider-theme="b" data-filter-placeholder="請輸入關鍵字">
+        @foreach (var item in Model)
+        {
+            var imgPath = @"../" + savePath + item.FileName;
+            if (firstName != item.FirstName)
+            {
+                <li data-role="list-divider">@item.FirstName</li>
+                firstName = item.FirstName;
+            }
+            <li>
+                <a>
+                    <img src="@imgPath" onclick="ShowHead('@imgPath')" width="100" height="80"/>
+                    <h3>@(item.FirstName + item.LastName)</h3>
+                    <h4>@item.Tel</h4>
+                </a>
+                <a href="@Url.Action("FriendDetails", "Home", new { id = item.id })">Details</a>
+            </li>
+        }
+    </ul>
+}
+<div data-role="popup" id="showHead" data-overlay-theme="c" data-corners="false" data-tolerance="30,15">
+    <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+    <img src="" id="headImg" />
+</div>

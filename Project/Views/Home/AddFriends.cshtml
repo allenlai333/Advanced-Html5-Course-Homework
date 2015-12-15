@@ -1,0 +1,36 @@
+﻿<script src="~/Scripts/add-friends.js"></script>
+<p class="left">
+    <h3>基本資料</h3>
+</p>
+@using (Html.BeginForm("AddFriends", "Home", FormMethod.Post, new { enctype = "multipart/form-data", data_ajax = "false" }))
+{
+    <div id="inputDiv">
+        <label for="Name">姓名</label>
+        <input type="text" name="Name" id="Name" placeholder="請輸入姓名" required="required" />
+        <label for="Tel">電話</label>
+        <input type="tel" name="Tel" id="Tel" placeholder="請輸入電話" required="required" />
+        <label for="Addr">地址</label>
+        <input type="text" name="Addr" id="Addr" placeholder="請輸入地址" required="required" />
+        <label for="yourHead">頭像</label>
+        <input type="file" name="myFile" id="myFile" />
+        <input type="submit" name="save" id="save" value="新增"/>
+    </div>
+}
+
+@if (TempData["isSuccess"] != null)
+{
+    <script>
+        $(document).on('pageinit', '#page1', function () {
+            $("#popupBasic").popup("open");
+        });
+    </script>
+    <div data-role="popup" id="popupBasic" data-transition="slide down" data-position-to="origin" data-theme="b" data-overlay-theme="a">
+        <p>
+            <br />
+            <h4>&nbsp;&nbsp;&nbsp;&nbsp;新增成功&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+            <br />
+        <p>
+    </div>
+}
+
+

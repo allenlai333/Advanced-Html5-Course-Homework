@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 應用程式</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("mobile", required: false)
+    <script src="~/Scripts/jquery.mobile-1.4.5.min.js"></script>
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+    <div data-role="page" id="mapPage">
+        <div data-role="header" data-position="fixed">
+            @RenderSection("header", required: false)
+            <h3>My Address Book</h3>
+        </div>
+        <div data-role="content">
+            @RenderBody()
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="@Url.Action("AddFriends","Home")" data-role="button" data-icon="home" rel="external">首頁</a></li>
+                    <li><a href="@Url.Action("Search","Home")" data-role="button" data-icon="search" rel="external">搜尋</a></li>
+                    <li><a href="@Url.Action("Info","Home")" data-role="button" data-icon="info" rel="external">關於</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

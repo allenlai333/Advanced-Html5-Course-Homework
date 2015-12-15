@@ -1,0 +1,22 @@
+﻿ @model MobileWeb.Models.friends
+
+@{
+    Layout = "~/Views/Home/_Layout.cshtml";
+    ViewBag.Title = "FriendDetails";
+}
+
+@section header{
+    <a href="#" data-rel="back" data-icon="arrow-l" class="ui-btn-left">返回</a>
+}
+<div id="addrDiv">
+    <h4>@Model.Addr</h4>
+</div>
+
+<div role="main" id="map_canvas" style="width:350px;height:400px;">
+</div>
+
+<!--Google map api-->
+@*<script src="~/Scripts/googlemap.js"></script>*@
+<script src="http://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script src="~/Scripts/friend-detail.js"></script>
+
